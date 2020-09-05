@@ -3,7 +3,7 @@ Test and self-use only
 
 Reference: csdn dalao
 
-Tool for download the illustartions by your specified illustrator in Pixiv
+Tool for download all illustartions by your specified illustrator in Pixiv
 
 Disclaimer: This tool may contains MANY bugs and user should anticipate all bugs of this tool before using it.
 

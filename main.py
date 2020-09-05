@@ -7,7 +7,7 @@ import downloadImg as d
 
 def start():
     l.login()
-    ID = input("Enter illustartor ID to download all the images he/she draws: ")
-    d.downloadImg(d.getAuthorImgDict(ID))
+    author_ID = input("Enter illustartor ID to download all the images he/she draws: ")
+    d.downloadImg(d.getAuthorImgDict(author_ID),author_ID)
 
 start()

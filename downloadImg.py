@@ -31,7 +31,7 @@ def downloadImg(author_img_dict, author_ID):
         os.mkdir(user.path + author_name)
     new_path = user.path + '/' + author_name + '/'
 
-    for i in range(len(author_img_dict)):
+    for i in range(50):
         target = "https://www.pixiv.net/artworks/" + author_img_dict[i]
         target = l.s.get(target).text
         img_url = re.findall('{"mini":".*?","thumb":".*?","small":".*?","regular":".*?","original":"(.*?)"}', target)
@@ -46,8 +46,12 @@ def downloadImg(author_img_dict, author_ID):
         img_response = l.s.get(img_dict[j], headers = header)
         img = img_response.content
         file_name = new_path + '{}'.format(author_img_dict[j]) + '.jpg'
+        # Check file existing or not, if yes, skip downloading process
+        if os.path.isfile(file_name):
+            continue
         with open(file_name, 'wb') as jpg:
             jpg.write(img)
             print("Downloaded: " + str(j+1) + " / " + str(len(img_dict)))
         if (j % 40 == 0):
             time.sleep(2)
+    print("End")

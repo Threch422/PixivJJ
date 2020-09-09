@@ -20,3 +20,7 @@ def login():
         'post_key': post_key
     }
     rep = s.post(p.LoginUrl, data = data, headers = p.loginHeader)
+    if (rep.status_code == 401):
+        print("Unauthorized Access. Please check your cookie and login status in Pixiv")
+    else:
+        print("Login successfully")

@@ -31,7 +31,7 @@ def downloadImg(author_img_dict, author_ID):
         os.mkdir(user.path + author_name)
     new_path = user.path + '/' + author_name + '/'
 
-    for i in range(50):
+    for i in range(len(author_img_dict)):
         target = "https://www.pixiv.net/artworks/" + author_img_dict[i]
         target = l.s.get(target).text
         img_url = re.findall('{"mini":".*?","thumb":".*?","small":".*?","regular":".*?","original":"(.*?)"}', target)

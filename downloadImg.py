@@ -49,6 +49,8 @@ def downloadImg(author_img_dict, author_ID, mode):
         new_path = user.path + '/' + title_tag + '/'
 
     for i in range(50):
+        if (i >= len(author_img_dict)):
+            break
         target_header = {
             'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36",
             'Referer': "https://www.pixiv.net/artworks/" + author_img_dict[i],

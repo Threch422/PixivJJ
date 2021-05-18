@@ -1,7 +1,3 @@
-import requests
-import re
-import os
-import time
 import login as l
 import downloadImg as d
 

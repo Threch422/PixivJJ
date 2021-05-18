@@ -2,7 +2,6 @@ import requests
 import re
 import os
 import time
-import login as l
 import preset as p
 import user_info as user
 from bs4 import BeautifulSoup
@@ -22,6 +21,7 @@ def getAuthorImgDict(author_ID):
     author_img_dict = eval(request.text)
     author_img_dict = author_img_dict['body']
     author_img_dict = list(author_img_dict.get('illusts', {}).keys())
+    print(author_img_dict) #debug
     return author_img_dict
 
 # mode: 0 = from specified illustrator, 1 = monthly ranking

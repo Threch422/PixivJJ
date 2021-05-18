@@ -1,12 +1,12 @@
 import requests
-import re
-import os
 import time
-import user_info as user
 import preset as p
+from selenium import webdriver
 
 s = requests.session()
 
+# depreicated
+''' 
 def login():
     # Getting post_key
     post_key_html = s.get(p.baseUrl, headers = p.loginHeader).text
@@ -21,6 +21,25 @@ def login():
     }
     rep = s.post(p.LoginUrl, data = data, headers = p.loginHeader)
     if (rep.status_code == 401):
-        print("Unauthorized Access. Please check your cookie and login status in Pixiv")
+        return "Unauthorized Access. Please check your cookie and login status in Pixiv"
     else:
-        print("Login successfully")
+        return "Login successfully"
+'''
+# Using selenium and webdriver
+def login():
+    login_url = "https://pixiv.net"
+    driver = webdriver.Chrome()
+    driver.get(url = login_url)
+    time.sleep(15)  # time for login
+    driver.refresh()
+    cookies = driver.get_cookies()
+    cookie_str = ""
+    # Grab the cookies and reassemble it
+    for cookie in cookies:
+        item_str = cookie["name"] + "=" + cookie["value"] + ";"
+        cookie_str += item_str
+    p.cookie = cookie_str
+    driver.quit()
+    time.sleep(1)
+
+

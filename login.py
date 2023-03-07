@@ -1,39 +1,34 @@
 import requests
 import time
 import preset as p
-from selenium import webdriver
+import user_info as user
+from selenium.webdriver.common.by import By
+import undetected_chromedriver as uc
 
 s = requests.session()
 
-# depreicated
-''' 
-def login():
-    # Getting post_key
-    post_key_html = s.get(p.baseUrl, headers = p.loginHeader).text
-    reg = r'name="post_key" value="(.*?)"'
-    re_key = re.compile(reg)
-    post_key = re.findall(re_key, post_key_html)
-    data = {
-        'pixiv_id': p.pixiv_id,
-        'password': p.password,
-        'return_to': p.return_to,
-        'post_key': post_key
-    }
-    rep = s.post(p.LoginUrl, data = data, headers = p.loginHeader)
-    if (rep.status_code == 401):
-        return "Unauthorized Access. Please check your cookie and login status in Pixiv"
-    else:
-        return "Login successfully"
-'''
-# Using selenium and webdriver
+# Using undetected_chromedriver to escape from bot detection
 def login():
     login_url = "https://pixiv.net"
-    driver = webdriver.Chrome()
+    driver = uc.Chrome()
+
     driver.get(url = login_url)
-    time.sleep(15)  # time for login
+    login_btn = driver.find_element(By.PARTIAL_LINK_TEXT, "Login")
+    login_btn.click()
+
+    username = driver.find_element(By.CLASS_NAME, "sc-bn9ph6-6.degQSE")
+    password = driver.find_element(By.CLASS_NAME, "sc-bn9ph6-6.hfoSmp")
+
+    username.send_keys(user.account)
+    password.send_keys(user.password)
+    password.submit()
+
+    time.sleep(3)
     driver.refresh()
+
     cookies = driver.get_cookies()
     cookie_str = ""
+    
     # Grab the cookies and reassemble it
     for cookie in cookies:
         item_str = cookie["name"] + "=" + cookie["value"] + ";"

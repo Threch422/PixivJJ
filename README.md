@@ -14,6 +14,10 @@ Ver 2.0: 15/2/2021
 
 Ver 3.0: 17/5/2021
 
+Ver 4.0: 07/03/2023
+
+1. Support AutoLogin with Selenium and undetected_chromedriver
+
 #### Required library and tools:
 
 1. BeautifulSoup4
